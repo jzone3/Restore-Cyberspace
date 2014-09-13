@@ -23,8 +23,10 @@ def default_behavior(message_id=None):
 	# get message from parse
 	return render_template('message.jade', message=message_id)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+	if request.method == 'POST':
+		change_user_to_posted()
 	return default_behavior()
 
 @app.route('/message/<message_id>')

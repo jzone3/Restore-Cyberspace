@@ -1,5 +1,16 @@
 {% extends "base.jade" %}
 {% block title %}Restore Cyberspace{% endblock %}
 {% block content %}
-h1 Your App Is Running!
+p.desc.center
+	| Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Maecenas sed diam eget risus varius blandit sit amet non magna. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+form.center(method="POST")
+	label(for="post") Enter Status
+	br
+	textarea#post(name="post")
+		| Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+	br
+	label(for="submit") Submit to FCC for comment
+	input#submit(type="checkbox", checked)
+	br
+	button.btn.btn-primary.btn-lg Post!
 {% endblock %}
