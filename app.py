@@ -3,20 +3,11 @@ import jinja2
 import os
 
 app = Flask(__name__)
+app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 @app.route('/')
-def hello():
-	return render_template("index.html")
-
-@app.route('/change')
-def redirect():
-	return redirect('/')
-
-@app.route('/post', methods=['GET','POST'])
-def post():
-	if request.method == 'POST':
-		return render_template('post.html')
-	return render_template('get.html')
+def index():
+	return render_template("index.jade")
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 8000))
