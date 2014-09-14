@@ -36,6 +36,7 @@ body {
 .desc p.cta {
 	padding-top: 15px;
 	font-size: 18px !important;
+	font-weight: bold;
 }
 
 textarea#post {
