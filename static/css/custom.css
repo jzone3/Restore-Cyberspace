@@ -78,6 +78,7 @@ hr {
 
 .fcc {
 	line-height: 35px;
+	display: none;
 }
 
 .loader img {
