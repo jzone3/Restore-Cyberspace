@@ -16,11 +16,11 @@ def current_user_has_posted():
 def change_user_to_posted():
 	session['posted'] = POSTED_SECRET
 
-def default_behavior(message=None):
+def default_behavior(message=None, index=False):
 	if not current_user_has_posted():
-		return render_template('index.jade')
+		return render_template('index.jade', index=index)
 	if message is None:
-		return render_template('index.jade', already_posted=True)
+		return render_template('index.jade', already_posted=True, index=index)
 	# get message from parse
 	return render_template('message.jade', message=message)
 
@@ -47,7 +47,7 @@ def just_posted():
 
 @app.route('/', methods=['GET'])
 def index():
-	return default_behavior()
+	return default_behavior(index=True)
 
 @app.route('/message/<message_id>')
 def message(message_id):
