@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, jsonify
 import jinja2
 import os
-from secret import *
 import json,httplib
 
 app = Flask(__name__)
