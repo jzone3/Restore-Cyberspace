@@ -1,7 +1,5 @@
 {
-  "name": "Flask Boilerplate",
-  "description": "A quick way to get started with your flask projects",
-  "repository": "https://github.com/parasm/flask-boilerplate",
-  "logo": "http://flask.pocoo.org/docs/0.10/_static/flask.png",
-  "keywords": ["flask", "python", "boilerplate"]
+  "name": "Restore Cyberspace",
+  "description": "Obfuscate your Facebook posts to support Net Neutrality",
+  "repository": "https://github.com/jzone3/restore-cyberspace"
 }
