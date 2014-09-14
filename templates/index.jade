@@ -1,16 +1,25 @@
 {% extends "base.jade" %}
 {% block title %}Restore Cyberspace{% endblock %}
 {% block content %}
-p.desc.center
-	| Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Maecenas sed diam eget risus varius blandit sit amet non magna. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+.center.loader
+	a(href="http://www.savetheinternet.com/")
+		img(src="static/ajax-loader.gif")
+.jumbotron.desc.center
+	p
+		| Net Neutrality should not block or discriminate against any applications or content that ride over those networks. Just as your phone company cannot decide who you could call and what you say on that call, your ISP should not be concerned with what content you view or post online.
+	p.cta
+		| Post your own blocked status to view your friend's!
+hr
 form.center(method="POST")
 	label(for="post") Enter Status
 	br
 	textarea#post(name="post")
 		| Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
 	br
-	label(for="submit") Submit to FCC for comment
-	input#submit(type="checkbox", checked)
+	.fcc
+		label(for="submit")
+			input#submit(type="checkbox", checked)
+			| Submit to FCC for comment
 	br
 	button.btn.btn-primary.btn-lg Post!
 {% endblock %}

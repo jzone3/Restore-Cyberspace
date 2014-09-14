@@ -11,7 +11,8 @@
 
 body {
 	font-family: ProximaNova, Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-	padding-top: 50px;
+	padding-top: 10px;
+	background-color: #ecf0f1;
 }
 
 .center{
@@ -19,18 +20,29 @@ body {
 }
 
 .desc {
-	color: #ecf0f1;
-	font-size: 30px;
+	/*color: #ecf0f1;*/
 	width: 70%;
 	margin-left: auto;
 	margin-right: auto;
-	padding-bottom: 50px;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	padding-top: 30px;
+}
+
+.desc p {
+	font-size: 23px;
+}
+
+.desc p.cta {
+	padding-top: 15px;
+	font-size: 18px !important;
 }
 
 textarea#post {
 	width: 500px;
 	height: 200px;
 	font-size: 17px;
+	background-color: #EFF4F5;
 }
 
 #post, #submit {
@@ -38,6 +50,40 @@ textarea#post {
 }
 
 label {
-	color: #bdc3c7;
-	font-size: 25px;
+	color: #2c3e50;
+	font-size: 21px;
+}
+
+input[type="checkbox"] {
+	margin-top: 9px !important;
+	margin-bottom: 9px !important;
+	width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: bottom;
+    position: relative;
+    top: -1px;
+    *overflow: hidden;
+    margin-right: 10px;
+}
+
+hr {
+	border-top: 1px solid #2c3e50;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.fcc {
+	line-height: 35px;
+}
+
+.loader img {
+	height: 64px;
+	width: 64px;
+}
+
+.loader {
+	padding-top: 10px;
 }
