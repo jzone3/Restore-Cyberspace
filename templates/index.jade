@@ -34,7 +34,6 @@ script(type='text/javascript')
 			dataType: "json",
 			success: function(d) {
 				$("#url-input").val(d.url);
-				alert('success');
 				window.fbAsyncInit = function() {
 					FB.init({
 						appId : '284362071753998',
@@ -47,7 +46,6 @@ script(type='text/javascript')
 					}, function(response){
 						console.log(response)
 					});
-					window.location.replace("http://localhost:8000/user_just_posted");
 				};
 
 				(function(d, s, id){
@@ -57,10 +55,11 @@ script(type='text/javascript')
 					js.src = "//connect.facebook.net/en_US/sdk.js";
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
+				window.location.replace("http://localhost:8000/user_just_posted?message=" + window.location.href.split("message/")[1]);
 			},
 			error: function(d) {
-				alert('error');
 				console.log(d);
+				location.reload();
 			}
 			})
 		e.preventDefault();

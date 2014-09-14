@@ -16,13 +16,13 @@ def current_user_has_posted():
 def change_user_to_posted():
 	session['posted'] = POSTED_SECRET
 
-def default_behavior(message_id=None):
+def default_behavior(message=None):
 	if not current_user_has_posted():
 		return render_template('index.jade')
-	if message_id is None:
+	if message is None:
 		return render_template('index.jade', already_posted=True)
 	# get message from parse
-	return render_template('message.jade', message=message_id)
+	return render_template('message.jade', message=message)
 
 @app.route('/post_status', methods=['POST'])
 def post_status():
@@ -40,14 +40,13 @@ def post_status():
 
 @app.route('/user_just_posted')
 def just_posted():
-	change_user_to_posted()
+	if request.args.get("message") is not None:
+		change_user_to_posted()
+		return redirect('/message/' + request.args.get("message"))
 	return redirect('/')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
-	if request.method == 'POST':
-		#save status
-		change_user_to_posted()
 	return default_behavior()
 
 @app.route('/message/<message_id>')
