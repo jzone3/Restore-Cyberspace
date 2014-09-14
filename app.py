@@ -5,7 +5,8 @@ from secret import *
 import json,httplib
 
 app = Flask(__name__)
-app.secret_key = SECRET_KEY
+app.secret_key = os.environ['SECRET_KEY']#SECRET_KEY
+POSTED_SECRET = os.environ['POSTED_SECRET']
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 def current_user_has_posted():
