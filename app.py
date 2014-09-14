@@ -66,9 +66,9 @@ def message(message_id):
 def about():
 	return render_template('about.jade')
 
-@app.route('/fb')
-def fb():
-	return render_template('fb.html')
+@app.route('/share')
+def share():
+	return render_template('share.html')
 
 # @app.route('/posted')
 # def posted():
