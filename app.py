@@ -36,7 +36,7 @@ def post_status():
    		"Content-Type": "application/json"
  	})
 	result = json.loads(connection.getresponse().read())
-	return jsonify({"url": "localhost:8000/message/" + result.get('objectId')})
+	return jsonify({"url": "restorecyberspace.com/message/" + result.get('objectId')})
 
 @app.route('/user_just_posted')
 def just_posted():

@@ -29,7 +29,7 @@ script(type='text/javascript')
 	$("#post-message-form").submit(function(e) {
 		$.ajax({
 			type: "POST",
-			url: "http://localhost:8000/post_status",
+			url: "http://restorecyberspace.com/post_status",
 			data: {"message": $("#post").val()},
 			dataType: "json",
 			success: function(d) {
@@ -42,7 +42,7 @@ script(type='text/javascript')
 					});
 					FB.ui({
 					method: 'share',
-					href: 'http://en.wikipedia.org/wiki/Flag_of_the_United_States#mediaviewer/File:Flag_of_the_United_States.svg',
+					href: 'http://restorecyberspace.com/share',
 					}, function(response){
 						console.log(response)
 					});
@@ -55,7 +55,7 @@ script(type='text/javascript')
 					js.src = "//connect.facebook.net/en_US/sdk.js";
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
-				window.location.replace("http://localhost:8000/user_just_posted?message=" + window.location.href.split("message/")[1]);
+				window.location.replace("http://restorecyberspace.com/user_just_posted?message=" + window.location.href.split("message/")[1]);
 			},
 			error: function(d) {
 				console.log(d);
