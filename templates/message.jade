@@ -1,6 +1,13 @@
 {% extends "base.jade" %}
 {% block title %}Message{% endblock %}
 {% block content %}
-p.desc.center
-	| {{message}}
+.center.loader
+	a(href="http://www.savetheinternet.com/")
+		img(src="/static/ajax-loader.gif")
+.jumbotron.desc.center
+	p
+		| {{message}}
+br
+.center
+	a(href="/").btn.btn-lg.btn-primary Make your own!
 {% endblock %}

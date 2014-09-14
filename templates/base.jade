@@ -5,7 +5,10 @@ html
 		link(rel="stylesheet", type="text/css", href="/static/css/custom.css")
 		script(src="http://code.jquery.com/jquery-1.11.0.min.js")
 		script(src="/static/js/bootstrap.min.js")
+		script(src="/static/js/custom.js")
 	body
 		.container
 			{% block content %}
 			{% endblock %}
+		{% block script %}
+		{% endblock %}

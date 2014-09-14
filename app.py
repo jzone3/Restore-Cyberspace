@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 import jinja2
 import os
 from secret import *
@@ -24,22 +24,29 @@ def default_behavior(message_id=None):
 	# get message from parse
 	return render_template('message.jade', message=message_id)
 
+@app.route('/post_status', methods=['POST'])
+def post_status():
+	connection = httplib.HTTPSConnection('api.parse.com', 443)
+	connection.connect()
+	connection.request('POST', '/1/classes/Status', json.dumps({
+   		"text": request.form.get("message")
+ 	}), {
+   		"X-Parse-Application-Id": "HMKZdmKBHqOubVBDulljRW8gqhdueTnsqzLfVovc",
+   		"X-Parse-REST-API-Key": "Tu0cErCkd0iZ2sj8PHf4ki50IkEAyfhOWTWhXIrW",
+   		"Content-Type": "application/json"
+ 	})
+	result = json.loads(connection.getresponse().read())
+	return jsonify({"url": "localhost:8000/message/" + result.get('objectId')})
+
+@app.route('/user_just_posted')
+def just_posted():
+	change_user_to_posted()
+	return redirect('/')
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	if request.method == 'POST':
-		text=request.form.get("post")
 		#save status
-		connection = httplib.HTTPSConnection('api.parse.com', 443)
-		connection.connect()
-		connection.request('POST', '/1/classes/Status', json.dumps({
-       		"text": text
-     	}), {
-       		"X-Parse-Application-Id": "HMKZdmKBHqOubVBDulljRW8gqhdueTnsqzLfVovc",
-       		"X-Parse-REST-API-Key": "Tu0cErCkd0iZ2sj8PHf4ki50IkEAyfhOWTWhXIrW",
-       		"Content-Type": "application/json"
-     	})
-		result = json.loads(connection.getresponse().read())
-		print 'localhost:8000/message/'+result.get('objectId')
 		change_user_to_posted()
 	return default_behavior()
 

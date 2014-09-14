@@ -3,14 +3,14 @@
 {% block content %}
 .center.loader
 	a(href="http://www.savetheinternet.com/")
-		img(src="static/ajax-loader.gif")
+		img(src="/static/ajax-loader.gif")
 .jumbotron.desc.center
 	p
 		| Net Neutrality is the force that has caused the Internet to revolutionize our lives. Without it big corporations would be able to pay for faster connection, while new startups could be slowed down. In other words, your favorite websites like Netflix or Facebook would never have been successful.
 	p.cta
 		| Post your own blocked status to view your friend's!
 hr
-form.center(method="POST")
+form#post-message-form.center(method="POST")
 	label(for="post") Enter Status
 	br
 	textarea#post(name="post")
@@ -21,5 +21,49 @@ form.center(method="POST")
 			input#submit(type="checkbox", checked)
 			| Submit to FCC for comment
 	br
+	input#url-input(type="hidden", name="url", value="test")
 	button.btn.btn-primary.btn-lg Post!
+{% endblock %}
+{% block script %}
+script(type='text/javascript')
+	$("#post-message-form").submit(function(e) {
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8000/post_status",
+			data: {"message": $("#post").val()},
+			dataType: "json",
+			success: function(d) {
+				$("#url-input").val(d.url);
+				alert('success');
+				window.fbAsyncInit = function() {
+					FB.init({
+						appId : '284362071753998',
+						xfbml : true,
+						version : 'v2.1'
+					});
+					FB.ui({
+					method: 'share',
+					href: 'http://en.wikipedia.org/wiki/Flag_of_the_United_States#mediaviewer/File:Flag_of_the_United_States.svg',
+					}, function(response){
+						console.log(response)
+					});
+					window.location.replace("http://localhost:8000/user_just_posted");
+				};
+
+				(function(d, s, id){
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) {return;}
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/sdk.js";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+			},
+			error: function(d) {
+				alert('error');
+				console.log(d);
+			}
+			})
+		e.preventDefault();
+		return false;
+	})
 {% endblock %}
