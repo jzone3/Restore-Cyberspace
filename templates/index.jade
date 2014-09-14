@@ -27,7 +27,7 @@ form#post-message-form.center(method="POST")
 			| Submit to FCC for comment
 	br
 	input#url-input(type="hidden", name="url", value="test")
-	button.btn.btn-primary.btn-lg Post{% if index %}!{% else %} and View Message{% endif %}
+	button.btn.btn-primary.btn-lg Post{% if index is defined and variable %}!{% elif index is defined and variable == False %} and View Message{% endif %}
 {% endblock %}
 {% block script %}
 script(type='text/javascript')
