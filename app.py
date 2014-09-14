@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import jinja2
 import os
 from secret import *
+import json,httplib
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -26,16 +27,41 @@ def default_behavior(message_id=None):
 @app.route('/', methods=['GET', 'POST'])
 def index():
 	if request.method == 'POST':
+		text=request.form.get("post")
+		#save status
+		connection = httplib.HTTPSConnection('api.parse.com', 443)
+		connection.connect()
+		connection.request('POST', '/1/classes/Status', json.dumps({
+       		"text": text
+     	}), {
+       		"X-Parse-Application-Id": "HMKZdmKBHqOubVBDulljRW8gqhdueTnsqzLfVovc",
+       		"X-Parse-REST-API-Key": "Tu0cErCkd0iZ2sj8PHf4ki50IkEAyfhOWTWhXIrW",
+       		"Content-Type": "application/json"
+     	})
+		result = json.loads(connection.getresponse().read())
+		print 'localhost:8000/message/'+result.get('objectId')
 		change_user_to_posted()
 	return default_behavior()
 
 @app.route('/message/<message_id>')
 def message(message_id):
-	return default_behavior(message_id)
+	connection = httplib.HTTPSConnection('api.parse.com', 443)
+	connection.connect()
+	connection.request('GET', '/1/classes/Status/'+message_id, '', {
+    	"X-Parse-Application-Id": "HMKZdmKBHqOubVBDulljRW8gqhdueTnsqzLfVovc",
+       	"X-Parse-REST-API-Key": "Tu0cErCkd0iZ2sj8PHf4ki50IkEAyfhOWTWhXIrW"
+    })
+	result = json.loads(connection.getresponse().read())
+	text=result.get("text")
+	return default_behavior(text)
 
 @app.route('/about')
 def about():
 	return render_template('about.jade')
+
+@app.route('/fb')
+def fb():
+	return render_template('fb.html')
 
 # @app.route('/posted')
 # def posted():
