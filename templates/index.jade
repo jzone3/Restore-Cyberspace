@@ -1,5 +1,10 @@
 {% extends "base.jade" %}
 {% block title %}Restore Cyberspace{% endblock %}
+{% block head %}
+meta(property="og:title", content="Restore Cyberspace")
+meta(property="og:description", content="███████████████████████")
+meta(property="og:image", content="http://www.restorecyberspace.com/static/black.jpeg")
+{% endblock %}
 {% block content %}
 .center.loader
 	a(href="http://www.savetheinternet.com/")
@@ -29,7 +34,7 @@ script(type='text/javascript')
 	$("#post-message-form").submit(function(e) {
 		$.ajax({
 			type: "POST",
-			url: "http://restorecyberspace.com/post_status",
+			url: "/post_status",
 			data: {"message": $("#post").val()},
 			dataType: "json",
 			success: function(d) {
@@ -42,7 +47,7 @@ script(type='text/javascript')
 					});
 					FB.ui({
 					method: 'share',
-					href: 'http://restorecyberspace.com/share',
+					href: 'http://www.' + d.url,
 					}, function(response){
 						console.log(response)
 					});
@@ -55,11 +60,11 @@ script(type='text/javascript')
 					js.src = "//connect.facebook.net/en_US/sdk.js";
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
-				window.location.replace("http://restorecyberspace.com/user_just_posted?message=" + window.location.href.split("message/")[1]);
+				setTimeout(function() {window.location.replace("http://www.restorecyberspace.com/user_just_posted?message=" + window.location.href.split("message/")[1])}, 2500);
 			},
 			error: function(d) {
 				console.log(d);
-				location.reload();
+				//- location.reload();
 			}
 			})
 		e.preventDefault();
